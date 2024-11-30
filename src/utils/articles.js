@@ -1,16 +1,38 @@
 // src/utils/articles.js
-import fs from 'fs';
-import path from 'path';
 import matter from 'gray-matter';
 
-const articlesDirectory = path.join(process.cwd(), 'src', 'content', 'articles');
+/**
+ * Fetches the list of all articles from the public/articlesList.json file.
+ * @returns {Promise<Array>} An array of article metadata.
+ */
+export async function getAllArticles() {
+  try {
+    const response = await fetch('/articlesList.json');
+    if (!response.ok) {
+      throw new Error('Failed to fetch articles list');
+    }
+    const articlesList = await response.json();
 
-export function getAllArticles() {
-  const fileNames = fs.readdirSync(articlesDirectory);
-  const articles = fileNames.map((fileName) => {
-    const slug = fileName.replace(/\.md$/, '');
-    const fullPath = path.join(articlesDirectory, fileName);
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    // Optionally, sort articles here if not sorted in articlesList.json
+    return articlesList.sort((a, b) => new Date(b.date) - new Date(a.date));
+  } catch (error) {
+    console.error('Error fetching articles list:', error);
+    return [];
+  }
+}
+
+/**
+ * Fetches a single article's content based on the provided slug.
+ * @param {string} slug - The unique identifier for the article.
+ * @returns {Promise<Object|null>} An object containing article data or null if not found.
+ */
+export async function getArticleBySlug(slug) {
+  try {
+    const response = await fetch(`/articles/${slug}.md`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch article: ${slug}`);
+    }
+    const fileContents = await response.text();
     const { data, content } = matter(fileContents);
 
     return {
@@ -18,21 +40,8 @@ export function getAllArticles() {
       ...data,
       content,
     };
-  });
-
-  return articles.sort((a, b) => new Date(b.date) - new Date(a.date));
-}
-
-export function getArticleBySlug(slug) {
-  const fullPath = path.join(articlesDirectory, `${slug}.md`);
-  if (!fs.existsSync(fullPath)) return null;
-
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-  const { data, content } = matter(fileContents);
-
-  return {
-    slug,
-    ...data,
-    content,
-  };
+  } catch (error) {
+    console.error(`Error fetching article "${slug}":`, error);
+    return null;
+  }
 }
