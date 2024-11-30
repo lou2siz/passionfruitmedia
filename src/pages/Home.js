@@ -1,15 +1,15 @@
 // src/pages/Home.js
-import React from "react";
-import Hero from "../components/Hero";
-import LiberalReformative from "../components/LiberalReformative";
-import InitiativeCard from "../components/InitiativeCard";
-import { Container, Typography, Grid } from "@mui/material";
+import React from 'react';
+import Hero from '../components/Hero';
+import LiberalReformative from '../components/LiberalReformative';
+import InitiativeCard from '../components/InitiativeCard';
+import { Container, Typography, Grid } from '@mui/material';
 
 const Home = () => {
   return (
     <div>
       <Hero />
-      <Container maxWidth="lg" style={{ marginTop: "40px" }}>
+      <Container maxWidth="lg" style={{ marginTop: '40px' }}>
         <Typography variant="h4" gutterBottom>
           Featured Initiatives
         </Typography>
@@ -18,14 +18,12 @@ const Home = () => {
             <InitiativeCard
               title="AI Ethics"
               description="Exploring ethical AI practices."
-              imageUrl="path/to/ai-ethics.jpg"
             />
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <InitiativeCard
               title="Music Advocacy"
               description="Empowering artists worldwide."
-              imageUrl="path/to/music-advocacy.jpg"
             />
           </Grid>
           {/* Add more cards as needed */}
