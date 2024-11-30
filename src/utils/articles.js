@@ -2,19 +2,40 @@
 import matter from 'gray-matter';
 
 /**
- * Fetches the list of all articles from the public/articlesList.json file.
+ * Array of all articles with their metadata.
+ */
+const articlesList = [
+  {
+    id: 1,
+    title: 'First Article',
+    description: 'An introduction to Passionfruit Media.',
+    date: '2023-01-15',
+    slug: 'first-article',
+  },
+  {
+    id: 2,
+    title: 'Second Article',
+    description: 'Exploring advanced features.',
+    date: '2023-02-20',
+    slug: 'second-article',
+  },
+  // Add more articles as needed
+];
+
+/**
+ * Fetches the list of all articles.
  * @returns {Promise<Array>} An array of article metadata.
  */
 export async function getAllArticles() {
   try {
-    const response = await fetch('/articlesList.json');
-    if (!response.ok) {
-      throw new Error('Failed to fetch articles list');
-    }
-    const articlesList = await response.json();
-
-    // Optionally, sort articles here if not sorted in articlesList.json
-    return articlesList.sort((a, b) => new Date(b.date) - new Date(a.date));
+    // Simulate asynchronous operation
+    return new Promise((resolve) => {
+      // Sort articles by date in descending order
+      const sortedArticles = articlesList.sort(
+        (a, b) => new Date(b.date) - new Date(a.date)
+      );
+      resolve(sortedArticles);
+    });
   } catch (error) {
     console.error('Error fetching articles list:', error);
     return [];
@@ -28,10 +49,13 @@ export async function getAllArticles() {
  */
 export async function getArticleBySlug(slug) {
   try {
-    const response = await fetch(`/articles/${slug}.md`);
+    const filePath = `/articles/${slug}.md`;
+    const response = await fetch(filePath);
+
     if (!response.ok) {
       throw new Error(`Failed to fetch article: ${slug}`);
     }
+
     const fileContents = await response.text();
     const { data, content } = matter(fileContents);
 

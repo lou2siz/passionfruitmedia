@@ -1,0 +1,17 @@
+[
+    {
+      "id": 1,
+      "title": "First Article",
+      "description": "Description of the first article.",
+      "date": "2023-01-01",
+      "slug": "first-article"
+    },
+    {
+      "id": 2,
+      "title": "Second Article",
+      "description": "Description of the second article.",
+      "date": "2023-02-01",
+      "slug": "second-article"
+    }
+  ]
+  

@@ -13,6 +13,7 @@ import theme from './theme';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import CategoryMenu from './components/CategoryMenu';
+import ErrorBoundary from './components/ErrorBoundary'; // Import ErrorBoundary
 
 // Lazy load page components for performance optimization
 const Home = lazy(() => import('./pages/Home'));
@@ -35,69 +36,110 @@ const TagsIndex = lazy(() => import('./pages/TagsIndex'));
 const Category = lazy(() => import('./pages/Category'));
 const SearchResults = lazy(() => import('./pages/SearchResults'));
 
-// Removed LiberalReformative import since it's not used in App.js
-// const LiberalReformative = lazy(() => import('./components/LiberalReformative'));
-
 // Fallback component for lazy loading
 const Loading = () => (
-  <div style={{ textAlign: 'center', marginTop: '50px' }}>
+  <Container sx={{ mt: 8, textAlign: 'center' }}>
     <Typography variant="h6">Loading...</Typography>
-  </div>
+  </Container>
+);
+
+// NotFound Component for undefined routes
+const NotFound = () => (
+  <Container sx={{ mt: 8, mb: 8, textAlign: 'center' }}>
+    <Typography variant="h4" gutterBottom>
+      404 - Page Not Found
+    </Typography>
+    <Typography variant="body1" gutterBottom>
+      The page you are looking for does not exist.
+    </Typography>
+    <Button variant="contained" color="primary" component={Link} to="/">
+      Go to Home
+    </Button>
+  </Container>
 );
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline /> {/* Normalize CSS across browsers */}
+      {/* Normalize CSS across browsers */}
+      <CssBaseline />
+
       <Router>
+        {/* Navigation Bar */}
         <Navbar />
+
+        {/* Category Menu - assuming it's a persistent component across pages */}
         <CategoryMenu />
-        <Suspense fallback={<Loading />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<Article />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/careers" element={<Careers />} />
-            <Route path="/events" element={<Events />} />
-            <Route path="/donate" element={<Donate />} />
-            <Route path="/testimonials" element={<Testimonials />} />
-            <Route path="/press" element={<Press />} />
-            <Route path="/leadership" element={<Leadership />} />
-            <Route path="/initiatives" element={<Initiatives />} />
-            <Route path="/partnerships" element={<Partnerships />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms-of-service" element={<TermsOfService />} />
-            <Route path="/tags" element={<TagsIndex />} />
-            <Route path="/tags/:tag" element={<Tag />} />
-            <Route path="/category/:category" element={<Category />} />
-            <Route path="/search" element={<SearchResults />} />
-            {/* Add more routes as needed */}
-            {/* Fallback route for undefined paths */}
-            <Route
-              path="*"
-              element={
-                <Container sx={{ mt: 8, mb: 8, textAlign: 'center' }}>
-                  <Typography variant="h4" gutterBottom>
-                    404 - Page Not Found
-                  </Typography>
-                  <Typography variant="body1" gutterBottom>
-                    The page you are looking for does not exist.
-                  </Typography>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    component={Link}
-                    to="/"
-                  >
-                    Go to Home
-                  </Button>
-                </Container>
-              }
-            />
-          </Routes>
-        </Suspense>
+
+        {/* Error Boundary to catch unforeseen errors */}
+        <ErrorBoundary>
+          {/* Suspense handles the lazy-loaded components' fallback */}
+          <Suspense fallback={<Loading />}>
+            <Routes>
+              {/* Home Route */}
+              <Route path="/" element={<Home />} />
+
+              {/* About Page */}
+              <Route path="/about" element={<About />} />
+
+              {/* Blog Listing Page */}
+              <Route path="/blog" element={<Blog />} />
+
+              {/* Individual Article Page */}
+              <Route path="/blog/:slug" element={<Article />} />
+
+              {/* Contact Page */}
+              <Route path="/contact" element={<Contact />} />
+
+              {/* Careers Page */}
+              <Route path="/careers" element={<Careers />} />
+
+              {/* Events Page */}
+              <Route path="/events" element={<Events />} />
+
+              {/* Donate Page */}
+              <Route path="/donate" element={<Donate />} />
+
+              {/* Testimonials Page */}
+              <Route path="/testimonials" element={<Testimonials />} />
+
+              {/* Press Page */}
+              <Route path="/press" element={<Press />} />
+
+              {/* Leadership Page */}
+              <Route path="/leadership" element={<Leadership />} />
+
+              {/* Initiatives Page */}
+              <Route path="/initiatives" element={<Initiatives />} />
+
+              {/* Partnerships Page */}
+              <Route path="/partnerships" element={<Partnerships />} />
+
+              {/* Privacy Policy Page */}
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+
+              {/* Terms of Service Page */}
+              <Route path="/terms-of-service" element={<TermsOfService />} />
+
+              {/* Tags Index Page */}
+              <Route path="/tags" element={<TagsIndex />} />
+
+              {/* Individual Tag Page */}
+              <Route path="/tags/:tag" element={<Tag />} />
+
+              {/* Category Page */}
+              <Route path="/category/:category" element={<Category />} />
+
+              {/* Search Results Page */}
+              <Route path="/search" element={<SearchResults />} />
+
+              {/* Fallback Route for Undefined Paths */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </ErrorBoundary>
+
+        {/* Footer */}
         <Footer />
       </Router>
     </ThemeProvider>
