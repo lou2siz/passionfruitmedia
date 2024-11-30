@@ -13,7 +13,9 @@ import Initiatives from './pages/Initiatives';
 import Leadership from './pages/Leadership';
 import Blog from './pages/Blog';
 import Events from './pages/Events';
+// src/App.js
 import Careers from './pages/Careers';
+
 import Donate from './pages/Donate';
 import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
