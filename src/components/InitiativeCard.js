@@ -1,28 +1,17 @@
 // src/components/InitiativeCard.js
-import React from "react";
-import {
-  Card,
-  CardContent,
-  Typography,
-  CardMedia,
-  CardActionArea,
-} from "@mui/material";
+import React from 'react';
+import { Card, CardContent, Typography, CardActionArea } from '@mui/material';
+import { Link } from 'react-router-dom';
 
-const InitiativeCard = ({ title, description, imageUrl }) => {
+const InitiativeCard = ({ title, description, link }) => {
   return (
     <Card elevation={3}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="160"
-          image={imageUrl}
-          alt={title}
-        />
+      <CardActionArea component={Link} to={link}>
         <CardContent>
-          <Typography variant="h6" component="div" gutterBottom>
+          <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold' }}>
             {title}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" color="textSecondary">
             {description}
           </Typography>
         </CardContent>

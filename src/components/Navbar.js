@@ -1,56 +1,107 @@
-// src/components/LiberalReformative.js
-import React from "react";
-import { Typography, Box, Card, CardContent, Container } from "@mui/material";
+// src/components/Navbar.js
+import React from 'react';
+import { AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem } from '@mui/material';
+import { Menu as MenuIcon } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
+import { styled } from '@mui/material/styles';
 
-const LiberalReformative = () => {
+const StyledToolbar = styled(Toolbar)(({ theme }) => ({
+  justifyContent: 'space-between',
+}));
+
+const Logo = styled(Typography)(({ theme }) => ({
+  fontWeight: 'bold',
+  fontSize: '1.5rem',
+  textDecoration: 'none',
+  color: theme.palette.primary.main,
+}));
+
+const NavLinks = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: theme.spacing(3),
+  [theme.breakpoints.down('md')]: {
+    display: 'none',
+  },
+}));
+
+const MobileMenuIcon = styled(IconButton)(({ theme }) => ({
+  display: 'none',
+  [theme.breakpoints.down('md')]: {
+    display: 'block',
+  },
+}));
+
+const Navbar = () => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleMobileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMobileMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const menuItems = [
+    { text: 'About Us', link: '/about' },
+    { text: 'Initiatives', link: '/initiatives' },
+    { text: 'Leadership', link: '/leadership' },
+    { text: 'Blog', link: '/blog' },
+    { text: 'Events', link: '/events' },
+    { text: 'Careers', link: '/careers' },
+    { text: 'Donate', link: '/donate' },
+    { text: 'Contact', link: '/contact' },
+  ];
+
   return (
-    <Box style={{ marginTop: "60px" }}>
-      <Container maxWidth="md">
-        <Card elevation={3}>
-          <CardContent>
-            <Typography variant="h4" gutterBottom>
-              Liberal Reformative Initiative: Mission Statement
-            </Typography>
-            <Typography variant="h5" gutterBottom>
-              Who We Are
-            </Typography>
-            <Typography variant="body1" paragraph>
-              We are a proud California Community College startup, rooted in the values of equity, integrity, and justice. Founded at MiraCosta Community College, we are a team of dedicated lawyers and journalists—each a product of the California Community College system. We aim to demonstrate that excellence in advocacy and journalism can come from accessible education and progressive values.
-            </Typography>
-            <Typography variant="h5" gutterBottom>
-              Our Commitment to Justice
-            </Typography>
-            <Typography variant="body1" paragraph>
-              <strong>Ethical Excellence:</strong> We pay all our lawyers and journalists at least 25% above fair market rates to ensure integrity and professionalism.
-            </Typography>
-            <Typography variant="body1" paragraph>
-              <strong>Uncovering Oppression:</strong> Our mission is to expose and litigate against systems of oppression that impact everyday people through investigative journalism, public records requests, and strategic litigation.
-            </Typography>
-            <Typography variant="h5" gutterBottom>
-              Our Core Values
-            </Typography>
-            <ul>
-              <Typography component="li" variant="body1" paragraph>
-                <strong>Integrity:</strong> Upholding truth and transparency in all our work.
-              </Typography>
-              <Typography component="li" variant="body1" paragraph>
-                <strong>Inclusivity:</strong> Amplifying marginalized voices, especially in the LGBTQ+ community.
-              </Typography>
-              <Typography component="li" variant="body1" paragraph>
-                <strong>Zero Tolerance for Hate:</strong> We treat all offenses seriously to promote equity.
-              </Typography>
-              <Typography component="li" variant="body1" paragraph>
-                <strong>LGBTQ+ Advocacy:</strong> Promoting self-love, equal treatment, and social acceptance.
-              </Typography>
-            </ul>
-            <Typography variant="body1" paragraph>
-              <strong>A Message of Hope:</strong> By promoting LGBTQ+ rights and exposing systemic oppression, we aim to inspire a more equitable world.
-            </Typography>
-          </CardContent>
-        </Card>
-      </Container>
-    </Box>
+    <AppBar position="static" color="inherit" elevation={0}>
+      <StyledToolbar>
+        <Logo component={Link} to="/">
+          Passionfruit Media
+        </Logo>
+        <NavLinks>
+          {menuItems.map((item, index) => (
+            <Button
+              key={index}
+              component={Link}
+              to={item.link}
+              color="inherit"
+              sx={{ fontWeight: 'bold' }}
+            >
+              {item.text}
+            </Button>
+          ))}
+        </NavLinks>
+        <MobileMenuIcon
+          edge="end"
+          color="inherit"
+          aria-label="menu"
+          onClick={handleMobileMenuOpen}
+        >
+          <MenuIcon />
+        </MobileMenuIcon>
+      </StyledToolbar>
+      <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleMobileMenuClose}
+        keepMounted
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      >
+        {menuItems.map((item, index) => (
+          <MenuItem
+            key={index}
+            component={Link}
+            to={item.link}
+            onClick={handleMobileMenuClose}
+          >
+            {item.text}
+          </MenuItem>
+        ))}
+      </Menu>
+    </AppBar>
   );
 };
 
-export default LiberalReformative;
+export default Navbar;

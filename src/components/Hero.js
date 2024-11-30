@@ -1,24 +1,43 @@
-import React from "react";
-import { Typography, Button } from "@mui/material";
-import { motion } from "framer-motion";
+// src/components/Hero.js
+import React from 'react';
+import { Typography, Button, Container } from '@mui/material';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
-      style={{ textAlign: "center", padding: "50px", background: "#FFE5D9" }}
+      style={{
+        backgroundImage: 'url(/images/hero-background.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        color: '#fff',
+        paddingTop: '150px',
+        paddingBottom: '150px',
+        textAlign: 'center',
+      }}
     >
-      <Typography variant="h3" gutterBottom>
-        Revolutionizing Media for Reformative Change
-      </Typography>
-      <Typography variant="subtitle1" gutterBottom>
-        Join us in promoting self-love and social advocacy.
-      </Typography>
-      <Button variant="contained" color="primary">
-        Learn More
-      </Button>
+      <Container maxWidth="md">
+        <Typography variant="h2" gutterBottom sx={{ fontWeight: 'bold' }}>
+          Revolutionizing Media for Reformative Change
+        </Typography>
+        <Typography variant="h5" gutterBottom>
+          Join us in promoting self-love and social advocacy.
+        </Typography>
+        <Button
+          component={Link}
+          to="/about"
+          variant="contained"
+          color="secondary"
+          size="large"
+          sx={{ mt: 4 }}
+        >
+          Learn More
+        </Button>
+      </Container>
     </motion.div>
   );
 };
