@@ -1,36 +1,41 @@
 // src/pages/Home.js
+
 import React from 'react';
-import Hero from '../components/Hero';
-import LiberalReformative from '../components/LiberalReformative';
-import InitiativeCard from '../components/InitiativeCard';
-import { Container, Typography, Grid } from '@mui/material';
+import { Container, Grid, Typography } from '@mui/material';
+import ArticleCard from '../components/ArticleCard';
+import FeaturedArticle from '../components/FeaturedArticle';
+import LiberalReformative from '../components/LiberalReformative'; // Import the component
+import SEO from '../components/SEO';
+import { getAllArticles } from '../utils/articles';
 
 const Home = () => {
+  const articles = getAllArticles();
+  const featuredArticle = articles[0]; // Assume the first article is featured
+  const otherArticles = articles.slice(1);
+
   return (
-    <div>
-      <Hero />
-      <Container maxWidth="lg" style={{ marginTop: '40px' }}>
-        <Typography variant="h4" gutterBottom>
-          Featured Initiatives
+    <>
+      <SEO
+        title="Home"
+        description="Passionfruit Media - Empowering Change"
+        url="https://yourwebsite.com"
+      />
+      <FeaturedArticle article={featuredArticle} />
+      <Container maxWidth="lg">
+        <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold', mt: 4 }}>
+          Latest News
         </Typography>
         <Grid container spacing={4}>
-          <Grid item xs={12} sm={6} md={4}>
-            <InitiativeCard
-              title="AI Ethics"
-              description="Exploring ethical AI practices."
-            />
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <InitiativeCard
-              title="Music Advocacy"
-              description="Empowering artists worldwide."
-            />
-          </Grid>
-          {/* Add more cards as needed */}
+          {otherArticles.map((article) => (
+            <Grid item xs={12} sm={6} md={4} key={article.slug}>
+              <ArticleCard article={article} />
+            </Grid>
+          ))}
         </Grid>
+        {/* Include the LiberalReformative component below the articles */}
         <LiberalReformative />
       </Container>
-    </div>
+    </>
   );
 };
 

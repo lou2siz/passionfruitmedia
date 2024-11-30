@@ -4,50 +4,47 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#1A237E', // Deep Indigo
+      main: '#333333', // Dark Gray
     },
     secondary: {
-      main: '#E65100', // Orange
+      main: '#990000', // Dark Red
     },
     background: {
-      default: '#F5F5DC', // Beige background
+      default: '#FFFFFF',
     },
     text: {
-      primary: '#333',
-      secondary: '#555',
+      primary: '#333333',
+      secondary: '#666666',
     },
   },
   typography: {
-    fontFamily: "'Montserrat', sans-serif",
+    fontFamily: "'Source Sans Pro', sans-serif",
     h1: {
-      fontWeight: 700,
-      fontSize: '3rem',
-    },
-    h2: {
       fontWeight: 700,
       fontSize: '2.5rem',
     },
-    h3: {
-      fontWeight: 600,
+    h2: {
+      fontWeight: 700,
       fontSize: '2rem',
     },
-    h4: {
-      fontWeight: 600,
+    h3: {
+      fontWeight: 700,
       fontSize: '1.75rem',
     },
-    h5: {
-      fontWeight: 500,
+    h4: {
+      fontWeight: 700,
       fontSize: '1.5rem',
     },
-    h6: {
-      fontWeight: 500,
+    h5: {
+      fontWeight: 700,
       fontSize: '1.25rem',
+    },
+    h6: {
+      fontWeight: 700,
+      fontSize: '1rem',
     },
     body1: {
       fontSize: '1rem',
-    },
-    button: {
-      textTransform: 'none',
     },
   },
 });

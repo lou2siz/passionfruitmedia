@@ -1,20 +1,24 @@
 // src/pages/About.js
 import React from 'react';
-import Header from '../components/Header';
 import { Container, Typography } from '@mui/material';
+import SEO from '../components/SEO';
 
 const About = () => {
   return (
     <>
-      <Header
+      <SEO
         title="About Us"
-        subtitle="Learn more about Passionfruit Media"
-        backgroundImage="/images/about-header.jpg"
+        description="Learn more about Passionfruit Media and our mission."
+        url="https://yourwebsite.com/about"
       />
-      <Container maxWidth="md" sx={{ mt: 5 }}>
-        <Typography variant="body1" paragraph>
-          {/* About Us content */}
+      <Container maxWidth="md" sx={{ mt: 8 }}>
+        <Typography variant="h3" gutterBottom sx={{ fontWeight: 'bold' }}>
+          About Us
         </Typography>
+        <Typography variant="body1" sx={{ mt: 2 }}>
+          Passionfruit Media is dedicated to promoting reformative self-love and social advocacy...
+        </Typography>
+        {/* Add more content as needed */}
       </Container>
     </>
   );

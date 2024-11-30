@@ -1,15 +1,17 @@
+// src/components/LiberalReformative.js
+
 import React from "react";
-import { Typography, Box, Card, CardContent } from "@mui/material";
+import { Typography, Box, Card, CardContent, List, ListItem, ListItemText } from "@mui/material";
 
 const LiberalReformative = () => {
   return (
-    <Box style={{ padding: "20px", background: "#F3F4F6", marginTop: "40px" }}>
+    <Box sx={{ padding: "20px", backgroundColor: "#F3F4F6", marginTop: "40px" }}>
       <Card>
         <CardContent>
-          <Typography variant="h4" gutterBottom>
+          <Typography variant="h4" gutterBottom sx={{ fontWeight: "bold" }}>
             Liberal Reformative Initiative: Mission Statement
           </Typography>
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="h6" gutterBottom sx={{ fontWeight: "bold" }}>
             Who We Are
           </Typography>
           <Typography variant="body1" gutterBottom>
@@ -19,31 +21,61 @@ const LiberalReformative = () => {
             to demonstrate that excellence in advocacy and journalism can come from accessible education
             and progressive values.
           </Typography>
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="h6" gutterBottom sx={{ fontWeight: "bold" }}>
             Our Commitment to Justice
           </Typography>
           <Typography variant="body1" gutterBottom>
-            <b>Ethical Excellence:</b> We pay all our lawyers and journalists at least 25% above fair
+            <strong>Ethical Excellence:</strong> We pay all our lawyers and journalists at least 25% above fair
             market rates to ensure integrity and professionalism.
           </Typography>
           <Typography variant="body1" gutterBottom>
-            <b>Uncovering Oppression:</b> Our mission is to expose and litigate against systems of
+            <strong>Uncovering Oppression:</strong> Our mission is to expose and litigate against systems of
             oppression that impact everyday people through investigative journalism, public records
             requests, and strategic litigation.
           </Typography>
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="h6" gutterBottom sx={{ fontWeight: "bold" }}>
             Our Core Values
           </Typography>
-          <Typography variant="body1" gutterBottom>
-            <ul>
-              <li><b>Integrity:</b> Upholding truth and transparency in all our work.</li>
-              <li><b>Inclusivity:</b> Amplifying marginalized voices, especially in the LGBTQ+ community.</li>
-              <li><b>Zero Tolerance for Hate:</b> We treat all offenses seriously to promote equity.</li>
-              <li><b>LGBTQ+ Advocacy:</b> Promoting self-love, equal treatment, and social acceptance.</li>
-            </ul>
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            <b>A Message of Hope:</b> By promoting LGBTQ+ rights and exposing systemic oppression, we
+          <List>
+            <ListItem>
+              <ListItemText
+                primary={
+                  <>
+                    <strong>Integrity:</strong> Upholding truth and transparency in all our work.
+                  </>
+                }
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemText
+                primary={
+                  <>
+                    <strong>Inclusivity:</strong> Amplifying marginalized voices, especially in the LGBTQ+ community.
+                  </>
+                }
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemText
+                primary={
+                  <>
+                    <strong>Zero Tolerance for Hate:</strong> We treat all offenses seriously to promote equity.
+                  </>
+                }
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemText
+                primary={
+                  <>
+                    <strong>LGBTQ+ Advocacy:</strong> Promoting self-love, equal treatment, and social acceptance.
+                  </>
+                }
+              />
+            </ListItem>
+          </List>
+          <Typography variant="body1" gutterBottom sx={{ mt: 2 }}>
+            <strong>A Message of Hope:</strong> By promoting LGBTQ+ rights and exposing systemic oppression, we
             aim to inspire a more equitable world.
           </Typography>
         </CardContent>
